@@ -1,8 +1,8 @@
 package com.yh.springbootPractice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.yh.springbootPractice.service.TestService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,12 +11,26 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/test")
-public class testController {
+@RequiredArgsConstructor
+public class TestController {
+
+    private final TestService testService; //DI 의존성 주입
+
+    @GetMapping("/calculator")
+    int calculatorForQueryParam(@RequestParam int num1, @RequestParam int num2){
+        return testService.calculator(num1, num2);
+    }
+
+    @GetMapping("/calculator/{num1}/{num2}")
+    int calculatorForPathVariable(@PathVariable int num1, @PathVariable int num2){
+        return testService.calculator(num1,num2);
+    }
 
     @GetMapping("/t")
     public String testMethod() {
         return "웹페이지";
     }
+
     @GetMapping("/json")
     public Map<String, Integer> testJsonMethod() {
         HashMap<String, Integer> map =  new HashMap<>();
@@ -25,6 +39,7 @@ public class testController {
         map.put("birthday", 2008);
         return map;
     }
+
     @GetMapping("/list")
     public List<Map<String, String>> testListMethod() {
         HashMap<String, String> map1 = new HashMap<>();

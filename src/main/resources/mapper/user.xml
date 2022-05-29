@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yh.springbootPractice.repository.UserRepository">
+    <select id="getUserList" resultType="com.yh.springbootPractice.entity.User">
+        SELECT
+        id, name, country, age, phone_number, is_use
+        FROM user
+    </select>
+</mapper>
